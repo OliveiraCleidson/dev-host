@@ -1,4 +1,4 @@
-module github.com/oliveiracleidson/devhost
+module github.com/oliveiracleidson/dev-host
 
 go 1.22.5
 

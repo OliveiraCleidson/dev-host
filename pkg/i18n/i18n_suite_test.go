@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/nicksnyder/go-i18n/v2/i18n"
-	sut "github.com/oliveiracleidson/devhost/pkg/i18n"
+	sut "github.com/oliveiracleidson/dev-host/pkg/i18n"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"golang.org/x/text/language"
@@ -46,7 +46,7 @@ var _ = Describe("I18n Unit Test", func() {
 				MessageID: "cli.name",
 			})
 			Expect(err).To(BeNil())
-			Expect(simpleMessage).To(Equal("Dev Setup"))
+			Expect(simpleMessage).To(Equal("Dev Host"))
 		})
 	})
 
