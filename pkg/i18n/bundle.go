@@ -21,6 +21,7 @@ var (
 )
 
 // CreateBundle creates a new i18n.Bundle with the given language
+// Line for PR test purpuse
 func CreateBundle(lang language.Tag) *i18n.Bundle {
 	bundle = i18n.NewBundle(lang)
 	bundle.RegisterUnmarshalFunc("yaml", yaml.Unmarshal)
