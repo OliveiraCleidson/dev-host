@@ -1,7 +1,6 @@
 package i18n_test
 
 import (
-	"log"
 	"testing"
 
 	"github.com/nicksnyder/go-i18n/v2/i18n"
@@ -14,18 +13,6 @@ import (
 func TestI18n(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "I18n Suite")
-}
-
-func getTranslation(message *i18n.Message, localizer *i18n.Localizer) string {
-	config := &i18n.LocalizeConfig{
-		MessageID:    message.ID,
-		TemplateData: nil,
-	}
-	translation, err := localizer.Localize(config)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return translation
 }
 
 var _ = Describe("I18n Unit Test", func() {
