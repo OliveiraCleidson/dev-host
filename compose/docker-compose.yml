@@ -1,0 +1,77 @@
+version: "3.9"
+
+name: dev-setup
+services:
+  pgsql:
+    container_name: ds-pgsql
+    image: docker.io/bitnami/postgresql:16
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 512M 
+    ports:
+      - '5432:5432'
+    volumes:
+      - '/var/lib/dev-setup/pgsql:/bitnami/postgresql'
+    environment:
+      - 'POSTGRESQL_PASSWORD=Password123'
+      - 'POSTGRESQL_POSTGRES_PASSWORD=Password123'
+  mongodb:
+    image: mongo:7.0.0
+    container_name: ds-mongodb
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 512M
+    ports:
+      - '27017:27017'
+    volumes:
+      - '/var/lib/dev-setup/mongodb:/data/db'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Password123
+  mongo-express:
+    container_name: ds-mongo-express
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Password123
+      ME_CONFIG_MONGODB_URL: mongodb://root:Password123@ds-mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+  rabbitmq:
+    container_name: ds-rabbitmq
+    image: rabbitmq:3.9.9-management
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 512M
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: Password123
+    volumes:
+      - '/var/lib/dev-setup/rabbitmq:/var/lib/rabbitmq'
+  redis:
+    container_name: ds-redis
+    image: bitnami/redis:latest
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 256M
+    ports:
+      - '6379:6379'
+    environment:
+      - REDIS_PASSWORD=Password123
